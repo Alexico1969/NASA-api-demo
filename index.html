@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>API intro</title>
+</head>
+<body>
+    <h1>Request</h1>
+    <p id="url"></p>
+    <p id="parameters"></p>
+    <button id="send">Send</button>
+    <h1>Response</h1>
+    <p id="response"></p>
+
+    <script>
+        var nasa_url = "https://api.nasa.gov/planetary/apod"
+        var parameters = "?api_key=DEMO_KEY"
+
+        $("#url").text(nasa_url);
+        $("#parameters").text(parameters);
+        
+        $("#send").click(function(){
+            $.ajax({
+                url: nasa_url+parameters,
+                success : function(result){
+                    $("#response").text(result.explanation);
+                    var title_html = "<h2>"+result.title+"</h2>";
+                    $("#response").append(title_html);                    
+                    var img_html = "<img src='"+result.url+"'/>";
+                    $("#response").append(img_html);
+                }
+            })
+        });
+
+    
+
+    </script>
+
+    <script>
+
+    </script>
+</body>
+</html>
